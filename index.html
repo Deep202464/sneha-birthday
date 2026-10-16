@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Anu!</title>
+    <title>Happy Birthday Sneha!</title>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -52,7 +53,7 @@
             z-index: 10;
         }
         .active { display: flex; }
-        h1, h2 { font-family: 'Caveat', cursive; font-size: 2.5rem; margin-bottom: 10px; }
+        h1, h2 { font-family: 'Caveat', cursive; font-size: 2.5rem; margin-bottom: 10px; position: relative; z-index: 2; }
         
         /* Buttons */
         .btn-group { display: flex; gap: 20px; margin-top: 20px; position: relative; width: 100%; justify-content: center; align-items: center; min-height: 50px; }
@@ -129,9 +130,20 @@
             min-height: 250px;
         }
 
-        /* Creative additions for Final Page (Screen 6 only) */
+        /* Creative animations (Confetti) */
+        .confetti-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none; 
+            z-index: 1;
+        }
+
         #screen-6 #final-reveal {
-            position: relative; /* Container for confetti */
+            position: relative; 
             width: 100%;
             height: 100%;
             display: flex;
@@ -140,21 +152,11 @@
             align-items: center;
         }
 
-        #confetti-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none; /* User can click through it if needed */
-        }
-
         .confetti {
             position: absolute;
             width: 10px;
             height: 10px;
-            background-color: #f00; /* Fallback */
+            background-color: #f00; 
             border-radius: 50%;
             opacity: 0.8;
             animation: confettiFall linear forwards;
@@ -165,9 +167,8 @@
             100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
 
-        /* Customize the final message for Screen 6 only */
-        #screen-6 #final-reveal h1 { margin-bottom: 0px; } /* Override general h1 margin */
-        #screen-6 #final-reveal p { margin: 5px 0; } /* tighter paragraph spacing */
+        #screen-6 #final-reveal h1 { margin-bottom: 0px; } 
+        #screen-6 #final-reveal p { margin: 5px 0; } 
 
         /* Shared Animations */
         @keyframes bounce {
@@ -185,13 +186,14 @@
 <body>
 
     <audio id="bgm" loop>
-        <source src="music.mp3" type="audio/mpeg"> </source> </audio>
-   
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 
     <div id="screen-1" class="screen active fade-in">
-        <h1>Happy Birthday,<br>Anu</h1>
-        <div style="font-size: 5rem;">🐻🎂🐼</div>
-        <p>Are you excited for what's next?</p>
+        <div id="screen1-confetti-container" class="confetti-layer"></div>
+        <h1>Happy Birthday,<br>Sneha</h1>
+        <div style="font-size: 5rem; position: relative; z-index: 2;">🐻🎂🐼</div>
+        <p style="position: relative; z-index: 2;">Are you excited for what's next?</p>
         <div class="btn-group">
             <button onclick="startApp()">Yes</button>
             <button id="btn-no" onmouseover="dodgeNo()" ontouchstart="dodgeNo()">No</button>
@@ -221,7 +223,7 @@
             <div class="msg-bubble" style="top: 10%; left: 0%; animation-delay: 0.5s;">Forever yours</div>
             <div class="msg-bubble" style="top: 25%; right: 0%; animation-delay: 1.5s;">You make my world beautiful</div>
             <div class="msg-bubble" style="bottom: 25%; left: 5%; animation-delay: 2.5s;">You are my sunshine ☀️</div>
-            <div class="msg-bubble" style="bottom: 10%; right: 5%; animation-delay: 3.5s;">Happy Birthday Anu ♥️</div>
+            <div class="msg-bubble" style="bottom: 10%; right: 5%; animation-delay: 3.5s;">Happy Birthday Sneha ♥️</div>
         </div>
         <button onclick="nextScreen(5)" style="margin-top: 30px; animation: popIn 0.5s forwards; animation-delay: 4.5s; opacity: 0;">Next</button>
     </div>
@@ -232,7 +234,7 @@
         <p id="envelope-text">Tap the envelope</p>
         
         <div id="the-letter" class="letter fade-in">
-            <h3 style="font-family: 'Caveat', cursive; color: var(--btn-pink); margin-top: 0;">Dear Anu,</h3>
+            <h3 style="font-family: 'Caveat', cursive; color: var(--btn-pink); margin-top: 0;">Dear Sneha,</h3>
             <p id="line1"></p>
             <p id="line2"></p>
             <p id="line3"></p>
@@ -249,12 +251,12 @@
         </div>
 
         <div id="final-reveal" style="display: none;" class="fade-in">
-            <div id="confetti-container"></div>
-            <div style="font-size: 5rem;">🥳🎂🎉</div>
-            <h1 style="font-family: 'Caveat', cursive; color: #ff6b81; font-size: 3rem; margin-bottom: 0;">It's a Party!</h1>
-            <div style="font-size: 1.5rem; font-weight: bold; margin-top: 10px;" class="fade-in">
+            <div id="final-confetti-container" class="confetti-layer"></div>
+            <div style="font-size: 5rem; position: relative; z-index: 2;">🥳🎂🎉</div>
+            <h1 style="font-family: 'Caveat', cursive; color: #ff6b81; font-size: 3rem; margin-bottom: 0; position: relative; z-index: 2;">It's a Party!</h1>
+            <div style="font-size: 1.5rem; font-weight: bold; margin-top: 10px; position: relative; z-index: 2;" class="fade-in">
                 <p>Lots of love for you💕</p>
-                <p>Once again, Happy Birthday Anu!</p>
+                <p>Once again, Happy Birthday Sneha!</p>
             </div>
         </div>
     </div>
@@ -344,7 +346,7 @@
             typeWriter(0, 0);
         }
 
-        // Gift Logic (Modified for new creative final page)
+        // Gift Logic
         let clicksLeft = 3;
         function openGift() {
             clicksLeft--;
@@ -353,48 +355,57 @@
                 document.getElementById('gift-box').style.transform = `scale(${1 + (3 - clicksLeft)*0.1})`;
             } else {
                 // Creative Reveal
-                document.getElementById('pre-gift-elements').style.display = 'none'; // Hide pre-reveal stuff
-                document.getElementById('final-reveal').style.display = 'flex'; // Show new creative page
+                document.getElementById('pre-gift-elements').style.display = 'none'; 
+                document.getElementById('final-reveal').style.display = 'flex'; 
                 
-                // Trigger the confetti
-                createConfettiBurst();
+                // Trigger the confetti on the final page
+                createConfettiBurst('final-confetti-container');
             }
         }
 
-        // New function specifically for Screen 6 Creative additions
-        function createConfettiBurst() {
-            const container = document.getElementById('confetti-container');
+        // Universal function for Confetti Burst
+        function createConfettiBurst(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
             const colors = ['#e83a5d', '#ff9f43', '#feca57', '#ff6b81', '#1dd1a1', '#54a0ff'];
-            const numberOfConfetti = 80; // More particles for a "burst"
+            const numberOfConfetti = 80; 
 
             for (let i = 0; i < numberOfConfetti; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
                 confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.animationDuration = (Math.random() * 2 + 3) + 's'; // 3-5 seconds fall
-                confetti.style.animationDelay = Math.random() * 1 + 's'; // Spaced out slightly
+                confetti.style.animationDuration = (Math.random() * 2 + 3) + 's'; 
+                confetti.style.animationDelay = Math.random() * 1 + 's'; 
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 
-                // Vary shapes (some circles, some squares)
                 if (Math.random() > 0.5) {
-                    confetti.style.borderRadius = '0%'; // Square
+                    confetti.style.borderRadius = '0%'; 
                 } else {
-                    confetti.style.borderRadius = '50%'; // Circle
+                    confetti.style.borderRadius = '50%'; 
                 }
                 
-                // Random scale/speed
-                const size = Math.random() * 5 + 8; // 8px-13px
+                const size = Math.random() * 5 + 8; 
                 confetti.style.width = size + 'px';
                 confetti.style.height = size + 'px';
 
                 container.appendChild(confetti);
 
-                // Clean up confetti after animation is done
                 setTimeout(() => {
                     confetti.remove();
-                }, 6000); // Wait longer than max duration + delay
+                }, 6000); 
             }
         }
+
+        // Trigger the confetti automatically on the Welcome page when it loads!
+        window.onload = () => {
+            setTimeout(() => {
+                createConfettiBurst('screen1-confetti-container');
+            }, 300); // Small delay so the page loads first before the burst
+        };
     </script>
 </body>
 </html>
+
+
+Create a link for this website
